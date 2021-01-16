@@ -9,25 +9,26 @@ import { Image, Card, Text, Avatar } from "react-native-elements";
 import AppImages from "../theme/AppImages";
 
 const CardItem = (props) => {
- 
+  const { item } = props;
+  console.log("item in card", item);
   return (
     <Card containerStyle={styles.card}>
       <ImageBackground
-        source={AppImages.mainBack}
+        source={item && item.image ? { uri: item.image } : AppImages.mainBack}
         style={styles.imgBg}
         borderRadius={10}
         resizeMode='stretch'
       >
         <View style={styles.imgView}>
           <Image source={AppImages.heartInActive} style={styles.ImageStyle} />
-          <Text >10.5k</Text>
+          <Text>10.5k</Text>
         </View>
-        <View style={styles.avatarView}>
+        {/* <View style={styles.avatarView}>
           <Avatar rounded source={AppImages.heartActive} size='large' />
-        </View>
+        </View> */}
         <View style={styles.textContainer}>
-          <Text style={styles.companyName}>company name</Text>
-          <Text style={styles.text}>description fsfks sdfhsf sdfsf kfsjf </Text>
+          <Text style={styles.companyName}>{item && item.name}</Text>
+          <Text style={styles.text}>{item && item.description} </Text>
         </View>
       </ImageBackground>
     </Card>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     position: "relative",
   },
-  imgBg: { height: "100%", width: '100%'},
+  imgBg: { height: "100%", width: "100%" },
   ImageStyle: {
     padding: 10,
     margin: 5,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     resizeMode: "stretch",
     alignItems: "center",
   },
-  imgView: { alignItems: "flex-end" ,paddingEnd:10},
+  imgView: { alignItems: "flex-end", paddingEnd: 10 },
   avatarView: { justifyContent: "center", alignItems: "center", padding: 10 },
   textContainer: {
     flex: 1,
