@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, SafeAreaView, ScrollView,TouchableHighlight } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, ScrollView,TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-elements";
 import AppImages from "../theme/AppImages";
 import CardItem from "../components/CardItem";
@@ -30,25 +30,52 @@ class Home extends Component {
               contentContainerStyle={styles.scrollHori}
               showsHorizontalScrollIndicator={false}
             >
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Detail")}
                 style={styles.upperRowView}
+                activeOpacity={0.7}
               >
                 <CardItem />
-              </TouchableHighlight>
-              <TouchableHighlight
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Detail")}
                 style={styles.upperRowView}
+                activeOpacity={0.7}
               >
                 <CardItem />
-              </TouchableHighlight>
-              <TouchableHighlight
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Detail")}
                 style={styles.upperRowView}
+                activeOpacity={0.7}
               >
                 <CardItem />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </ScrollView>
+          </View>
+          <Text style={styles.txtPopular}>Most Viewed Recipes</Text>
+          <View style={styles.rowView}>
+          <TouchableOpacity
+            style={styles.cardView}
+            activeOpacity={0.7}
+            onPress={() => this.props.navigation.navigate("Detail")}
+          >
+            <CardItem />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cardView}
+            activeOpacity={0.7}
+            onPress={() => this.props.navigation.navigate("Detail")}
+          >
+            <CardItem />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cardView}
+            activeOpacity={0.7}
+            onPress={() => this.props.navigation.navigate("Detail")}
+          >
+            <CardItem />
+          </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -66,12 +93,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   upperRowView: { width: 200, marginRight: 10 },
-  rowView: {
-    flexDirection: "row",
-    paddingTop: 15,
-    justifyContent: "space-between",
-  },
   txtPopular: { fontSize: 15, fontFamily: "OpenSans-SemiBold" },
   txtViewall: { fontSize: 15, fontFamily: "OpenSans-SemiBold", color: "red" },
-  scrollHori: { paddingTop: 20,},
+  scrollHori: { paddingTop: 10,marginBottom:10},
+  rowView: {
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingBottom: 10,
+  },
+  cardView: { width: "48.2%" },
+  
 });
