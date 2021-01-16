@@ -22,11 +22,8 @@ const CardItem = (props) => {
       >
         <View style={styles.imgView}>
           <Image source={AppImages.heartInActive} style={styles.ImageStyle} />
-          <Text>10.5k</Text>
+          <Text>{item && item.favStatus}</Text>
         </View>
-        {/* <View style={styles.avatarView}>
-          <Avatar rounded source={AppImages.heartActive} size='large' />
-        </View> */}
         <View style={styles.textContainer}>
           <Text style={styles.companyName}>{item && item.name}</Text>
           <Text style={styles.text}>{item && item.description} </Text>
@@ -50,7 +47,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     borderColor: "#fff",
     position: "relative",
-    opacity:0.8
+    opacity: 0.8,
   },
   imgBg: { height: "100%", width: "100%" },
   ImageStyle: {
@@ -74,14 +71,14 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 12,
     textTransform: "capitalize",
-    fontFamily:'OpenSans-Regular',
+    fontFamily: "OpenSans-Regular",
     overflow: "hidden",
   },
 
   companyName: {
     fontSize: 16,
     color: "#fff",
-    fontFamily:'OpenSans-Bold',
+    fontFamily: "OpenSans-Bold",
     overflow: "hidden",
   },
 });
