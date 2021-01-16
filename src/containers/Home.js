@@ -1,14 +1,62 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, SafeAreaView, ScrollView,TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { Avatar } from "react-native-elements";
 import AppImages from "../theme/AppImages";
 import CardItem from "../components/CardItem";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 class Home extends Component {
-    constructor(props){
-        super(props);
-        this.state={}
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      apiData: {},
+      popularData: [],
+      viewData: [],
+    };
+  }
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem("TOKEN");
+    const id = await AsyncStorage.getItem("ID");
+    console.log("in didount", id, "----", token);
+    const fullToken = `Bearer ${token}`;
+    console.log("fulltoken", fullToken);
+    fetch("https://webapps.iqlance-demo.com/chef/public/api/home", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: fullToken,
+      },
+      body: JSON.stringify({
+        userID: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("resonse in home", response.status);
+        // this.setState({ apiData: response.data });
+        if (response && response.status) {
+          this.setState({
+            popularData: response && response.data && response.data.popular,
+          });
+          this.setState({
+            viewData: response && response.data && response.data.viewed,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  }
   render() {
+      const{popularData,viewData}=this.state;
+    console.log("in render", this.state.popularData);
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topRoView}>
@@ -30,7 +78,27 @@ class Home extends Component {
               contentContainerStyle={styles.scrollHori}
               showsHorizontalScrollIndicator={false}
             >
-              <TouchableOpacity
+                 {popularData && popularData.length>0 &&
+            popularData.map((item, i) => {
+              return (
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Detail")}
+                style={styles.upperRowView}
+                key={i}
+                activeOpacity={0.7}
+              >
+                <CardItem item={item}/>
+              </TouchableOpacity>
+              );
+            })}
+              {/* <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Detail")}
+                style={styles.upperRowView}
+                activeOpacity={0.7}
+              >
+                <CardItem />
+              </TouchableOpacity> */}
+              {/* <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Detail")}
                 style={styles.upperRowView}
                 activeOpacity={0.7}
@@ -43,39 +111,32 @@ class Home extends Component {
                 activeOpacity={0.7}
               >
                 <CardItem />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Detail")}
-                style={styles.upperRowView}
-                activeOpacity={0.7}
-              >
-                <CardItem />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </ScrollView>
           </View>
           <Text style={styles.txtPopular}>Most Viewed Recipes</Text>
           <View style={styles.rowView}>
-          <TouchableOpacity
-            style={styles.cardView}
-            activeOpacity={0.7}
-            onPress={() => this.props.navigation.navigate("Detail")}
-          >
-            <CardItem />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.cardView}
-            activeOpacity={0.7}
-            onPress={() => this.props.navigation.navigate("Detail")}
-          >
-            <CardItem />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.cardView}
-            activeOpacity={0.7}
-            onPress={() => this.props.navigation.navigate("Detail")}
-          >
-            <CardItem />
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cardView}
+              activeOpacity={0.7}
+              onPress={() => this.props.navigation.navigate("Detail")}
+            >
+              <CardItem />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cardView}
+              activeOpacity={0.7}
+              onPress={() => this.props.navigation.navigate("Detail")}
+            >
+              <CardItem />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cardView}
+              activeOpacity={0.7}
+              onPress={() => this.props.navigation.navigate("Detail")}
+            >
+              <CardItem />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -91,12 +152,12 @@ const styles = StyleSheet.create({
   topRoView: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom:10,
+    marginBottom: 10,
   },
   upperRowView: { width: 200, marginRight: 10 },
   txtPopular: { fontSize: 15, fontFamily: "OpenSans-SemiBold" },
   txtViewall: { fontSize: 15, fontFamily: "OpenSans-SemiBold", color: "red" },
-  scrollHori: { paddingTop: 10,marginBottom:10},
+  scrollHori: { paddingTop: 10, marginBottom: 10 },
   rowView: {
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -104,5 +165,4 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   cardView: { width: "48.2%" },
-  
 });

@@ -8,10 +8,11 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import { Button } from "react-native-elements";
 import AppImages from "../theme/AppImages";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,7 @@ class SignIn extends Component {
     this.props.navigation.navigate("ForgotPassword");
   };
   onSignin = () => {
+    this.CallApi();
     const { email, password } = this.state;
     // if (!email) {
     //   Alert.alert("Please fill email");
@@ -37,9 +39,42 @@ class SignIn extends Component {
     //   Alert.alert("Please fill password");
     //   return;
     // } else {
-      console.log("on click signi in", email, password);
-      this.props.navigation.navigate("Home");
+    console.log("on click signi in", email, password);
+    // this.props.navigation.navigate("Home");
     // }
+  };
+  CallApi = () => {
+    const { email, password } = this.state;
+    let token, id;
+    fetch("https://webapps.iqlance-demo.com/chef/public/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        email: "meetpatel.iqlance@gmail.com",
+        password: "Meet@123",
+        device_token: "123",
+        device_type: "ios",
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        token = response && response.data && response.data.accessToken;
+        id =
+          response &&
+          response.data &&
+          response.data.user_info &&
+          response.data.user_info.id;
+        // console.log("iddddd", id);
+        token && AsyncStorage.setItem("TOKEN", token);
+        id && AsyncStorage.setItem("ID",JSON.stringify(id));
+        token && this.props.navigation.navigate("Home");
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
   render() {
     const { email, password } = this.state;
@@ -169,7 +204,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: "flex-end",
   },
-btnText:{fontSize:14,fontFamily:'OpenSans-Bold'},
+  btnText: { fontSize: 14, fontFamily: "OpenSans-Bold" },
   viewSignUp: {
     flex: 0.3,
     justifyContent: "center",
