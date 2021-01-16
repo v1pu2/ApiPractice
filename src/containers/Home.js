@@ -55,7 +55,7 @@ class Home extends Component {
       });
   }
   render() {
-      const{popularData,viewData}=this.state;
+    const { popularData, viewData } = this.state;
     console.log("in render", this.state.popularData);
     return (
       <SafeAreaView style={styles.container}>
@@ -78,40 +78,20 @@ class Home extends Component {
               contentContainerStyle={styles.scrollHori}
               showsHorizontalScrollIndicator={false}
             >
-                 {popularData && popularData.length>0 &&
-            popularData.map((item, i) => {
-              return (
-                <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Detail")}
-                style={styles.upperRowView}
-                key={i}
-                activeOpacity={0.7}
-              >
-                <CardItem item={item}/>
-              </TouchableOpacity>
-              );
-            })}
-              {/* <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Detail")}
-                style={styles.upperRowView}
-                activeOpacity={0.7}
-              >
-                <CardItem />
-              </TouchableOpacity> */}
-              {/* <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Detail")}
-                style={styles.upperRowView}
-                activeOpacity={0.7}
-              >
-                <CardItem />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Detail")}
-                style={styles.upperRowView}
-                activeOpacity={0.7}
-              >
-                <CardItem />
-              </TouchableOpacity> */}
+              {popularData &&
+                popularData.length > 0 &&
+                popularData.map((item, i) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate("Detail")}
+                      style={styles.upperRowView}
+                      key={i}
+                      activeOpacity={0.7}
+                    >
+                      <CardItem item={item} />
+                    </TouchableOpacity>
+                  );
+                })}
             </ScrollView>
           </View>
           <Text style={styles.txtPopular}>Most Viewed Recipes</Text>
