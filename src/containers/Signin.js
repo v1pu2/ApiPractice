@@ -5,7 +5,7 @@ class SignIn extends Component {
   render() {
     return (
       <View>
-        <Txt>sign in</Txt>
+        <Text>sign in</Text>
       </View>
     );
   }
