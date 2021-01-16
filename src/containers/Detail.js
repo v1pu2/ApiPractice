@@ -8,28 +8,13 @@ import {
   StatusBar,
   Image,
   ImageBackground,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
 import AppImages from "../theme/AppImages";
 import VideoPlayer from "react-native-video-player";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const list = [
-  { id: 1, name: "Salt" },
-  { id: 2, name: "Papper" },
-  { id: 3, name: "Mint" },
-  { id: 4, name: "Cheese" },
-  { id: 5, name: "Yogurt" },
-  { id: 6, name: "Butter" },
-];
-const steps = [
-  { id: 1, name: "Sstep1alt", isImage: true },
-  { id: 2, name: "step2", isImage: false },
-  { id: 3, name: "step3", isImage: true },
-  { id: 4, name: "step4", isImage: true },
-  { id: 5, name: "step5", isImage: true },
-  { id: 6, name: "step6", isImage: false },
-  { id: 7, name: "Sstep1alt", isImage: true },
-];
+const deviceWidth = Dimensions.get("window").width;
 class Detail extends Component {
   constructor(props) {
     // console.log('in s=const',props.navigation.state.params)
@@ -90,11 +75,10 @@ class Detail extends Component {
             <View style={styles.playerView}>
               <VideoPlayer
                 video={{
-                  uri:
-                    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                  uri: recipes.video,
                 }}
-                videoWidth={1600}
-                videoHeight={900}
+                videoWidth={3000}
+                videoHeight={1200}
                 thumbnail={{
                   uri: "https://i.picsum.photos/id/866/1600/900.jpg",
                 }}
