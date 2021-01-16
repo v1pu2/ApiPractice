@@ -18,30 +18,18 @@ class SignIn extends Component {
     super(props);
 
     this.state = {
-      email: "",
-      password: "",
+      email: "meetpatel.iqlance@gmail.com",
+      password: "Meet@123",
     };
   }
   onChangeState = (name, value) => {
     this.setState({ [name]: value });
   };
   onClickForgot = () => {
-    console.log("forgot click");
     this.props.navigation.navigate("ForgotPassword");
   };
   onSignin = () => {
     this.CallApi();
-    const { email, password } = this.state;
-    // if (!email) {
-    //   Alert.alert("Please fill email");
-    //   return;
-    // } else if (!password) {
-    //   Alert.alert("Please fill password");
-    //   return;
-    // } else {
-    console.log("on click signi in", email, password);
-    // this.props.navigation.navigate("Home");
-    // }
   };
   CallApi = () => {
     const { email, password } = this.state;
@@ -53,8 +41,8 @@ class SignIn extends Component {
         accept: "application/json",
       },
       body: JSON.stringify({
-        email: "meetpatel.iqlance@gmail.com",
-        password: "Meet@123",
+        email: email,
+        password: password,
         device_token: "123",
         device_type: "ios",
       }),
@@ -67,9 +55,8 @@ class SignIn extends Component {
           response.data &&
           response.data.user_info &&
           response.data.user_info.id;
-        // console.log("iddddd", id);
         token && AsyncStorage.setItem("TOKEN", token);
-        id && AsyncStorage.setItem("ID",JSON.stringify(id));
+        id && AsyncStorage.setItem("ID", JSON.stringify(id));
         token && this.props.navigation.navigate("Home");
       })
       .catch((err) => {

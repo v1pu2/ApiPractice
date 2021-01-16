@@ -8,7 +8,7 @@ import AppImages from "../theme/AppImages";
 
 const CardView = (props) => {
   const { item } = props;
-  console.log("item in card", item);
+ 
   return (
     <Card containerStyle={styles.card}>
       <View style={styles.imgBg}>

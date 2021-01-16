@@ -10,7 +10,7 @@ import AppImages from "../theme/AppImages";
 
 const CardItem = (props) => {
   const { item } = props;
-  console.log("item in card", item);
+
   return (
     <Card containerStyle={styles.card}>
       <ImageBackground

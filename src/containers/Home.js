@@ -24,9 +24,7 @@ class Home extends Component {
   async componentDidMount() {
     const token = await AsyncStorage.getItem("TOKEN");
     const id = await AsyncStorage.getItem("ID");
-    console.log("in didount", id, "----", token);
     const fullToken = `Bearer ${token}`;
-    console.log("fulltoken", fullToken);
     fetch("https://webapps.iqlance-demo.com/chef/public/api/home", {
       method: "POST",
       headers: {
@@ -40,8 +38,6 @@ class Home extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("resonse in home", response.status);
-        // this.setState({ apiData: response.data });
         if (response && response.status) {
           this.setState({
             popularData: response && response.data && response.data.popular,
@@ -57,16 +53,13 @@ class Home extends Component {
   }
   itemClick = (item) => {
     const recipeId = item && item.recipesID;
-    console.log("on item clickid", recipeId);
     if (recipeId) {
-        console.log('inside if')
       AsyncStorage.setItem("RECIPEID", JSON.stringify(recipeId));
       this.props.navigation.navigate("Detail");
     }
   };
   render() {
     const { popularData, viewData } = this.state;
-    console.log("in render", this.state.popularData);
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topRoView}>

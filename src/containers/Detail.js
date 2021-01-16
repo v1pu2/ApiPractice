@@ -17,20 +17,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const deviceWidth = Dimensions.get("window").width;
 class Detail extends Component {
   constructor(props) {
-    // console.log('in s=const',props.navigation.state.params)
     super(props);
     this.state = {
       data: {},
     };
   }
   async componentDidMount() {
-    // console.log('tis.state.id'.this.state.id1)
+  
     const token = await AsyncStorage.getItem("TOKEN");
     const id = await AsyncStorage.getItem("RECIPEID");
-    console.log("in didount", id);
+   
     const fullToken = `Bearer ${token}`;
-    console.log("fulltoken", fullToken);
-    // if(id && token){
+    
     fetch("https://webapps.iqlance-demo.com/chef/public/api/recipeDetail", {
       method: "POST",
       headers: {
@@ -44,7 +42,6 @@ class Detail extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("resonse in detail", response);
         this.setState({ data: response && response.data });
       })
       .catch((err) => {
@@ -54,7 +51,6 @@ class Detail extends Component {
   }
   render() {
     const { data } = this.state;
-    console.log("in render", this.state.data);
     const recipes = data && data.recipes;
     const ingres = data && data.recipeIngredients;
     const steps = data && data.steps;

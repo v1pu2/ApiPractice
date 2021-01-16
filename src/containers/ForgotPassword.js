@@ -15,7 +15,6 @@ const deviceWidth = Dimensions.get("window").width;
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const onSubmit = () => {
-    console.log("on submit click", email);
   };
   return (
     <SafeAreaView style={styles.container}>
