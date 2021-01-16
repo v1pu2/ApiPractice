@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { View,Text } from "react-native";
 
 const CardItem = () => {
   return (
     <View>
-      <Txt>CardItem</Txt>
+      <Text>CardItem</Text>
     </View>
   );
 };
