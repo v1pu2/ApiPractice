@@ -30,16 +30,16 @@ class SignIn extends Component {
   };
   onSignin = () => {
     const { email, password } = this.state;
-    if (!email) {
-      Alert.alert("Please fill email");
-      return;
-    } else if (!password) {
-      Alert.alert("Please fill password");
-      return;
-    } else {
+    // if (!email) {
+    //   Alert.alert("Please fill email");
+    //   return;
+    // } else if (!password) {
+    //   Alert.alert("Please fill password");
+    //   return;
+    // } else {
       console.log("on click signi in", email, password);
       this.props.navigation.navigate("Home");
-    }
+    // }
   };
   render() {
     const { email, password } = this.state;
