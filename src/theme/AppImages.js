@@ -1,5 +1,6 @@
 const AppImages = {
   emailIcon: require("../../assets/ic_email.png"),
+  avatar:require("../../assets/ic_avatar_home.png"),
   mainBack: require("../../assets/img_landingflow_bg.png"),
   heartActive: require("../../assets/ic_heart_active.png"),
   heartInActive: require("../../assets/ic_heart_inactive.png"),

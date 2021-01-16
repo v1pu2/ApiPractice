@@ -16,7 +16,7 @@ class Home extends Component {
             <Text>Hello</Text>
             <Text>name</Text>
           </View>
-          <Avatar rounded source={AppImages.heartActive} size='medium' />
+          <Avatar rounded source={AppImages.avatar} size='medium' />
         </View>
         <ScrollView showsHorizontalScrollIndicator={false}>
           <View style={styles.rowView}>
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   topRoView: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom:10,
   },
   upperRowView: { width: 200, marginRight: 10 },
   txtPopular: { fontSize: 15, fontFamily: "OpenSans-SemiBold" },
