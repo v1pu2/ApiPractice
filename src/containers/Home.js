@@ -55,6 +55,15 @@ class Home extends Component {
         console.log("error", err);
       });
   }
+  itemClick = (item) => {
+    const recipeId = item && item.recipesID;
+    console.log("on item clickid", recipeId);
+    if (recipeId) {
+        console.log('inside if')
+      AsyncStorage.setItem("RECIPEID", JSON.stringify(recipeId));
+      this.props.navigation.navigate("Detail");
+    }
+  };
   render() {
     const { popularData, viewData } = this.state;
     console.log("in render", this.state.popularData);
@@ -84,7 +93,8 @@ class Home extends Component {
                 popularData.map((item, i) => {
                   return (
                     <TouchableOpacity
-                      onPress={() => this.props.navigation.navigate("Detail")}
+                      //   onPress={() => this.props.navigation.navigate("Detail")}
+                      onPress={() => this.itemClick(item)}
                       style={styles.upperRowView}
                       key={i}
                       activeOpacity={0.7}
@@ -102,7 +112,8 @@ class Home extends Component {
               viewData.map((item, i) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate("Detail")}
+                    // onPress={() => this.props.navigation.navigate("Detail")}
+                    onPress={() => this.itemClick(item)}
                     style={styles.upperRowView}
                     key={i}
                     activeOpacity={0.7}
