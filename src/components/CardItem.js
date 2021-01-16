@@ -18,15 +18,18 @@ const CardItem = (props) => {
         source={{ uri: item && item.image }}
         style={styles.imgBg}
         borderRadius={10}
+        // imageStyle={{ opacity: 0.7 }}
         resizeMode='stretch'
       >
-        <View style={styles.imgView}>
-          <Image source={AppImages.heartInActive} style={styles.ImageStyle} />
-          <Text>{item && item.favStatus}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.companyName}>{item && item.name}</Text>
-          <Text style={styles.text}>{item && item.description} </Text>
+        <View style={styles.child}>
+          <View style={styles.imgView}>
+            <Image source={AppImages.heartInActive} style={styles.ImageStyle} />
+            <Text>{item && item.favStatus}</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.companyName}>{item && item.name}</Text>
+            <Text style={styles.text}>{item && item.description} </Text>
+          </View>
         </View>
       </ImageBackground>
     </Card>
@@ -47,9 +50,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
     borderColor: "#fff",
     position: "relative",
-    opacity: 0.8,
   },
   imgBg: { height: "100%", width: "100%" },
+  child: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)" },
   ImageStyle: {
     padding: 10,
     margin: 5,
