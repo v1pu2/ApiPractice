@@ -8,7 +8,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Alert,
+  Alert
 } from "react-native";
 import { Button } from "react-native-elements";
 import AppImages from "../theme/AppImages";
@@ -102,6 +102,28 @@ class SignIn extends Component {
                 title='Signin'
                 buttonStyle={{ marginTop: 20 }}
               />
+              <Text style={styles.txtOr}>Or</Text>
+
+              <View style={styles.inputContainer}>
+                <Image
+                  source={require("../../assets/ic_email.png")}
+                  style={styles.ImageStyle}
+                />
+
+                <Text style={styles.btnText}>Login with Google</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <Image
+                  source={require("../../assets/ic_email.png")}
+                  style={styles.ImageStyle}
+                />
+
+                <Text style={styles.btnText}>Continue with Apple</Text>
+              </View>
+            </View>
+            <View style={styles.viewSignUp}>
+              <Text style={styles.txtDont}>Don't have an account? </Text>
+              <Text style={styles.txtSigUp}>Sign Up</Text>
             </View>
           </View>
         </ImageBackground>
@@ -129,6 +151,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     flex: 1,
   },
+  txtOr: { alignSelf: "center", marginTop: 30, fontSize: 16 },
   txtWelcome: { fontFamily: "OpenSans-Bold", fontSize: 16 },
   middleView: { flex: 3, padding: 20 },
   txtSkip: { paddingTop: 20, fontFamily: "OpenSans-Bold", color: "#fff" },
@@ -146,4 +169,13 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: "flex-end",
   },
+btnText:{fontSize:14,fontFamily:'OpenSans-Bold'},
+  viewSignUp: {
+    flex: 0.3,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  txtDont: { fontSize: 14, color: "#fff" },
+  txtSigUp: { fontSize: 14, fontFamily: "OpenSans-Bold", color: "#fff" },
 });
