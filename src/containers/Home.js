@@ -10,6 +10,7 @@ import {
 import { Avatar } from "react-native-elements";
 import AppImages from "../theme/AppImages";
 import CardItem from "../components/CardItem";
+import CardView from "../components/CardView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 class Home extends Component {
   constructor(props) {
@@ -96,27 +97,20 @@ class Home extends Component {
           </View>
           <Text style={styles.txtPopular}>Most Viewed Recipes</Text>
           <View style={styles.rowView}>
-            <TouchableOpacity
-              style={styles.cardView}
-              activeOpacity={0.7}
-              onPress={() => this.props.navigation.navigate("Detail")}
-            >
-              <CardItem />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cardView}
-              activeOpacity={0.7}
-              onPress={() => this.props.navigation.navigate("Detail")}
-            >
-              <CardItem />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cardView}
-              activeOpacity={0.7}
-              onPress={() => this.props.navigation.navigate("Detail")}
-            >
-              <CardItem />
-            </TouchableOpacity>
+            {viewData &&
+              viewData.length > 0 &&
+              viewData.map((item, i) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate("Detail")}
+                    style={styles.upperRowView}
+                    key={i}
+                    activeOpacity={0.7}
+                  >
+                    <CardView item={item} />
+                  </TouchableOpacity>
+                );
+              })}
           </View>
         </ScrollView>
       </SafeAreaView>
