@@ -1,12 +1,21 @@
 import React, { Component } from "react";
-import { View,StyleSheet,Text, } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView } from "react-native";
+import { Button } from "react-native-elements";
 
 class SignIn extends Component {
+  onSignin = () => {
+    this.props.navigation.navigate("Home");
+  };
   render() {
     return (
-      <View>
+      <SafeAreaView>
         <Text>sign in</Text>
-      </View>
+        <Button
+          onPress={() => this.onSignin()}
+          title='Signin'
+          buttonStyle={{ marginTop: 20 }}
+        />
+      </SafeAreaView>
     );
   }
 }
